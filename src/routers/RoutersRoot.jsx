@@ -1,9 +1,9 @@
 import React from "react";
 import { useRoutes } from "react-router";
-import PhonenumberLogin from "../components/PhonenumberLogin";
 import HomePage from "../pages/HomePage";
 import LoginsPage from "../pages/LoginsPage";
 import NotFoundPage from "../pages/NotFoundPage";
+import PhonenumberLoginPage from "../pages/PhonenumberLoginPage";
 
 function RoutersRoot() {
   const rootRouter = useRoutes([
@@ -27,7 +27,7 @@ function RoutersRoot() {
     },
     {
       path: "logins/phonenumber",
-      element: <PhonenumberLogin />,
+      element: <PhonenumberLoginPage />,
     },
   ]);
   return rootRouter;

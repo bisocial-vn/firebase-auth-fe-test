@@ -1,140 +1,90 @@
 import {
   Box,
-  Button,
   Container,
-  InputAdornment,
-  Paper,
-  TextField,
   IconButton,
+  Paper,
+  Typography,
 } from "@material-ui/core";
+import ArrowBack from "@material-ui/icons/ArrowBack";
+import BubbleChart from "@material-ui/icons/BubbleChart";
+import MobileFriendlyIcon from "@material-ui/icons/MobileFriendly";
+import "firebase/auth";
 import React from "react";
-import CenterFluidLayout from "./CenterFluidLayout";
-import { Controller, useForm } from "react-hook-form";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import HomeIcon from "@material-ui/icons/Home";
 import { useNavigate } from "react-router";
 import { NavLink } from "react-router-dom";
 import { firebaseAuth } from "../firebases/FirebaseIndex";
-import firebase from "firebase/app";
-import "firebase/auth";
+import CenterFluidLayout from "./CenterFluidLayout";
+import PhonenumberSendCode from "./PhonenumberLogin/PhonenumberSendCode";
+import PhonenumberVerifyCode from "./PhonenumberLogin/PhonenumberVerifyCode";
 
-const VN_PHONE_PREFIX = "+84";
+const VN_COUNTRY_PHONE_PREFIX = "+84";
 
 function PhonenumberLogin() {
-  const { control, handleSubmit, errors: fieldErrors } = useForm({
-    mode: "onTouched",
-    reValidateMode: "onChange",
-  });
+  const [confirmResultFn, setConfirmResultFn] = React.useState(undefined);
+  const [err, setErr] = React.useState();
 
-  const onSubmit = (data) => {
+  const onSendingCode = (data) => {
     console.log(data);
-    let phoneStr = VN_PHONE_PREFIX + data.phone;
+    let phoneStr = VN_COUNTRY_PHONE_PREFIX + data.phone;
     firebaseAuth
       .signInWithPhoneNumber(phoneStr, window.recaptchaVerifier)
       .then((confirmResult) => {
         console.log(confirmResult);
+        setConfirmResultFn(confirmResult);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        setErr(err);
+      });
   };
   const navigate = useNavigate();
-
   const goBack = () => navigate(-1);
-  const goHome = () => navigate("/");
-
-  const validatePhone = (phoneInput) => {
-    if (phoneInput === undefined || phoneInput.length <= 0) {
-      return "Phone number is required.";
-    }
-    // if (phoneInput.length === 10 && phoneInput.startsWith("0")) {
-    //   return undefined;
-    // }
-    if (phoneInput.length !== 9) {
-      return "Invalid phone number.";
-    }
-    return undefined;
-  };
-
-  React.useEffect(() => {
-    window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
-      "verifyCapchaContainer"
-    );
-  });
 
   return (
-    <CenterFluidLayout>
-      <form noValidate onSubmit={handleSubmit(onSubmit)}>
+    <>
+      <CenterFluidLayout>
         <Container maxWidth="xs">
-          <Paper>
-            <Box display="flex" justifyContent="space-between">
-              <IconButton aria-label="go back" onClick={goBack} edge="end">
-                <ArrowBackIcon />
+          <Paper elevation={24}>
+            <Box
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+              bgcolor="background.default"
+            >
+              <IconButton aria-label="go back" onClick={goBack}>
+                <ArrowBack />
               </IconButton>
-              <IconButton
-                aria-label="go home"
-                onClick={goHome}
-                style={{ alignSelf: "center" }}
-                color="primary"
-                component={NavLink}
-                to="/"
-              >
-                <HomeIcon fontSize="large" />
-              </IconButton>
-              <Box>
-                <IconButton />
+              <Box display="flex" alignContent="center" alignItems="center">
+                <MobileFriendlyIcon color="primary" />
+                <Typography variant="button" component="h2" color="primary">
+                  &nbsp;LOGIN USING PHONE
+                </Typography>
+              </Box>
+              <Box style={{ visibility: "hidden" }}>
+                <IconButton color="primary" component={NavLink} to="/">
+                  <BubbleChart />
+                </IconButton>
               </Box>
             </Box>
-            <Box display="flex" flexDirection="column" padding={4}>
-              <Controller
-                name="phone"
-                control={control}
-                defaultValue=""
-                rules={{
-                  required: {
-                    value: true,
-                    message: "Phone is required.",
-                  },
-                  validate: (value) => validatePhone(value),
-                }}
-                render={({ value, onBlur, onChange }) => (
-                  <TextField
-                    id="phone"
-                    label="Phone"
-                    variant="outlined"
-                    value={value}
-                    onChange={onChange}
-                    onBlur={onBlur}
-                    fullWidth
-                    required
-                    margin="normal"
-                    helperText={
-                      fieldErrors.phone ? fieldErrors.phone.message : undefined
-                    }
-                    error={!!fieldErrors.phone}
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          {VN_PHONE_PREFIX}
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
-                )}
-              />
-              <div id="verifyCapchaContainer" />
-              <Button
-                type="submit"
-                // id="submitPhonenumberLogin"
-                variant="outlined"
-                size="large"
-                color="primary"
-              >
-                Submit
-              </Button>
+            {err && (
+              <Typography variant="caption" color="initial">
+                Test err
+              </Typography>
+            )}
+            <PhonenumberSendCode onSubmit={onSendingCode} />
+            <Box bgcolor="background.default" textAlign="center">
+              <IconButton color="primary" component={NavLink} to="/">
+                <BubbleChart />
+              </IconButton>
             </Box>
           </Paper>
         </Container>
-      </form>
-    </CenterFluidLayout>
+        <PhonenumberVerifyCode
+          phoneVerifyFn={confirmResultFn}
+          showVerifyDialog={confirmResultFn}
+        />
+      </CenterFluidLayout>
+    </>
   );
 }
 
