@@ -8,7 +8,10 @@ import {
   Typography,
   Box,
   Button,
+  Divider,
 } from "@material-ui/core";
+import Lock from "@material-ui/icons/Lock";
+import BasicPaperLayout from "components/layouts/BasicPaperLayout";
 
 function HomePage() {
   return (
@@ -33,13 +36,29 @@ function HomePage() {
                   Firebase Auth test
                 </Typography>
                 <Box display="inline-flex" justifyContent="space-between">
-                  <Button variant="outlined" color="primary">
-                    <RouterLink to="/logins">Login</RouterLink>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    component={RouterLink}
+                    to="/logins"
+                  >
+                    Login
                   </Button>
-                  {/* <Divider style={{ margin: "0px 8px" }} /> */}
-                  {/* <Button variant="outlined" color="default">
-                      <RouterLink to="/registers">Register</RouterLink>
-                    </Button> */}
+                  <Divider
+                    variant="middle"
+                    orientation="vertical"
+                    flexItem
+                    light
+                    style={{ margin: "0px 8px" }}
+                  />
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    component={RouterLink}
+                    to="/registers"
+                  >
+                    Register
+                  </Button>
                 </Box>
               </Box>
             </Container>
@@ -51,6 +70,11 @@ function HomePage() {
               Firebase Auth test
             </Typography>
           </Box>
+          <BasicPaperLayout headerText="test paper" HeaderIcon={Lock}>
+            <Typography variant="h1" color="initial">
+              test pAper basic layout
+            </Typography>
+          </BasicPaperLayout>
           <Outlet />
         </Container>
       </Grid>

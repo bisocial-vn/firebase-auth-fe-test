@@ -1,9 +1,10 @@
+import RegistersPage from "pages/RegistersPage";
 import React from "react";
 import { useRoutes } from "react-router";
-import HomePage from "../pages/HomePage";
-import LoginsPage from "../pages/LoginsPage";
-import NotFoundPage from "../pages/NotFoundPage";
-import PhonenumberLoginPage from "../pages/PhonenumberLoginPage";
+import HomePage from "pages/HomePage";
+import LoginsPage from "pages/LoginsPage";
+import NotFoundPage from "pages/NotFoundPage";
+import PhonenumberRegisterPage from "pages/PhonenumberRegisterPage";
 
 function RoutersRoot() {
   const rootRouter = useRoutes([
@@ -18,16 +19,14 @@ function RoutersRoot() {
     {
       path: "/logins",
       element: <LoginsPage />,
-      //   children: [
-      //     {
-      //       path: "phonenumber",
-      //       element: <PhonenumberLogin />,
-      //     },
-      //   ],
     },
     {
-      path: "logins/phonenumber",
-      element: <PhonenumberLoginPage />,
+      path: "/registers",
+      element: <RegistersPage />,
+    },
+    {
+      path: "/registers/phonenumber",
+      element: <PhonenumberRegisterPage />,
     },
   ]);
   return rootRouter;

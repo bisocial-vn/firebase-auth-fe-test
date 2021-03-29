@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  CircularProgress,
   InputAdornment,
   TextField,
   Typography,
@@ -12,7 +13,7 @@ import SmsIcon from "@material-ui/icons/Sms";
 
 const VN_COUNTRY_PHONE_PREFIX = "+84";
 
-function PhonenumberSendCode({ onSubmit }) {
+function PhonenumberSendCode({ onSubmit, loading }) {
   const { control, handleSubmit, errors: fieldErrors } = useForm({
     mode: "onTouched",
     reValidateMode: "onChange",
@@ -90,7 +91,7 @@ function PhonenumberSendCode({ onSubmit }) {
             size="large"
             color="primary"
             style={{ marginTop: "12px" }}
-            startIcon={<SmsIcon />}
+            startIcon={loading ? <CircularProgress size="1rem" /> : <SmsIcon />}
           >
             Send
           </Button>

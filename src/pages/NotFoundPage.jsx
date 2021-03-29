@@ -1,15 +1,24 @@
-import React from "react";
+import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
-import { NavLink } from "react-router-dom";
+import ErrorOutlineOutlinedIcon from "@material-ui/icons/ErrorOutlineOutlined";
+import CenterFluidLayout from "components/CenterFluidLayout";
+import BasicPaperLayout from "components/layouts/BasicPaperLayout";
+import React from "react";
 
 function NotFoundPage() {
   return (
-    <div>
-      <Typography variant="body1" color="initial">
-        Not found!
-      </Typography>
-      <NavLink to="/">Homepage</NavLink>
-    </div>
+    <CenterFluidLayout>
+      <Container maxWidth="xs">
+        <BasicPaperLayout
+          headerText="Not found"
+          headerIcon={<ErrorOutlineOutlinedIcon color="primary" />}
+        >
+          <Typography variant="h5" component="h1" align="center">
+            NOT FOUND!
+          </Typography>
+        </BasicPaperLayout>
+      </Container>
+    </CenterFluidLayout>
   );
 }
 
