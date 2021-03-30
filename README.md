@@ -1,3 +1,6 @@
+# Status
+[![Deploy to Firebase Hosting on merge](https://github.com/bisocial-vn/firebase-auth-fe-test/actions/workflows/firebase-hosting-merge.yml/badge.svg)](https://github.com/bisocial-vn/firebase-auth-fe-test/actions/workflows/firebase-hosting-merge.yml)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

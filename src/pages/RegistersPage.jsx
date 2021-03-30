@@ -1,23 +1,26 @@
-import { Divider, makeStyles, Typography } from "@material-ui/core";
-import Button from "@material-ui/core/Button";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-import LockOpenIcon from "@material-ui/icons/LockOpen";
+import {
+  Button,
+  Container,
+  Divider,
+  Grid,
+  makeStyles,
+  Typography,
+} from "@material-ui/core";
+import AccountBoxIcon from "@material-ui/icons/AccountBox";
+import BasicPaperLayout from "components/layouts/BasicPaperLayout";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import MobileFriendlyIcon from "@material-ui/icons/MobileFriendly";
-import BasicPaperLayout from "components/layouts/BasicPaperLayout";
 import GTranslateIcon from "@material-ui/icons/GTranslate";
 import React from "react";
 import { NavLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
-  loginOptionItem: {
-    width: "80%",
+  regOptionItem: {
     margin: theme.spacing(1),
   },
 }));
 
-export default function LoginsPage() {
+function RegistersPage() {
   const classes = useStyles();
 
   return (
@@ -32,8 +35,8 @@ export default function LoginsPage() {
     >
       <Container maxWidth="xs">
         <BasicPaperLayout
-          headerText="LOGIN"
-          headerIcon={<LockOpenIcon color="primary" />}
+          headerText="REGISTER"
+          headerIcon={<AccountBoxIcon color="primary" />}
         >
           <Grid
             container
@@ -44,50 +47,53 @@ export default function LoginsPage() {
             wrap="nowrap"
           >
             <Button
-              className={classes.loginOptionItem}
+              className={classes.regOptionItem}
               variant="outlined"
               color="primary"
+              fullWidth
               component={NavLink}
-              to="phonenumber"
+              to="google"
               startIcon={<GTranslateIcon />}
             >
-              Login with google
+              Register with google
             </Button>
             <Button
-              className={classes.loginOptionItem}
+              className={classes.regOptionItem}
               variant="outlined"
               color="primary"
+              fullWidth
               component={NavLink}
-              to="phonenumber"
+              to="email"
               startIcon={<MailOutlineIcon />}
             >
-              Login with email
+              Register with email
             </Button>
             <Button
-              className={classes.loginOptionItem}
+              className={classes.regOptionItem}
               variant="outlined"
               color="primary"
+              fullWidth
               component={NavLink}
               to="phonenumber"
               startIcon={<MobileFriendlyIcon />}
             >
-              Login with phonenumber
+              Register with phonenumber
             </Button>
             <Divider
-              className={classes.loginOptionItem}
-              style={{ width: "60%" }}
+              className={classes.regOptionItem}
+              style={{ width: "80%" }}
               variant="middle"
               light
             />
             <Typography variant="body2" color="initial" fontStyle="italic">
-              You do not have an account?
+              Already have an account?
               <Typography
                 variant="subtitle2"
                 color="primary"
                 component={NavLink}
-                to="/registers"
+                to="/logins"
               >
-                &nbsp;Register
+                &nbsp;Login
               </Typography>
             </Typography>
           </Grid>
@@ -97,3 +103,5 @@ export default function LoginsPage() {
     </Grid>
   );
 }
+
+export default RegistersPage;
