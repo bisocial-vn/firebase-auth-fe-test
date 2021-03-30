@@ -16,7 +16,6 @@ import { NavLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   regOptionItem: {
-    // width: "80%",
     margin: theme.spacing(1),
   },
 }));
@@ -53,7 +52,7 @@ function RegistersPage() {
               color="primary"
               fullWidth
               component={NavLink}
-              to="phonenumber"
+              to="google"
               startIcon={<GTranslateIcon />}
             >
               Register with google
@@ -64,7 +63,7 @@ function RegistersPage() {
               color="primary"
               fullWidth
               component={NavLink}
-              to="phonenumber"
+              to="email"
               startIcon={<MailOutlineIcon />}
             >
               Register with email

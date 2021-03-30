@@ -5,6 +5,8 @@ import HomePage from "pages/HomePage";
 import LoginsPage from "pages/LoginsPage";
 import NotFoundPage from "pages/NotFoundPage";
 import PhonenumberRegisterPage from "pages/PhonenumberRegisterPage";
+import EmailRegisterPage from "pages/EmailRegisterPage";
+import FirebaseActionHandlerPage from "pages/FirebaseActionHandlerPage";
 
 function RoutersRoot() {
   const rootRouter = useRoutes([
@@ -27,6 +29,14 @@ function RoutersRoot() {
     {
       path: "/registers/phonenumber",
       element: <PhonenumberRegisterPage />,
+    },
+    {
+      path: "/registers/email",
+      element: <EmailRegisterPage />,
+    },
+    {
+      path: "/firbs/auth/action",
+      element: <FirebaseActionHandlerPage />,
     },
   ]);
   return rootRouter;

@@ -1,6 +1,6 @@
 import React from "react";
-import CenterFluidLayout from "../components/CenterFluidLayout";
-import PhonenumberRegister from "../components/PhonenumberRegister";
+import CenterFluidLayout from "components/layouts/CenterFluidLayout";
+import PhonenumberRegister from "components/PhonenumberRegister/PhonenumberRegister";
 
 function PhonenumberRegisterPage() {
   return (

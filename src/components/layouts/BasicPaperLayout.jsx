@@ -14,7 +14,7 @@ function BasicPaperLayout({ children, headerText, headerIcon }) {
         alignItems="center"
         bgcolor="background.default"
       >
-        <IconButton aria-label="go back" onClick={goBack}>
+        <IconButton aria-label="go back" onClick={goBack} size="medium">
           <ArrowBack />
         </IconButton>
         <Box display="flex" alignContent="center" alignItems="center">

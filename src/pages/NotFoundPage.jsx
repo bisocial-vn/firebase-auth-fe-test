@@ -1,7 +1,7 @@
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import ErrorOutlineOutlinedIcon from "@material-ui/icons/ErrorOutlineOutlined";
-import CenterFluidLayout from "components/CenterFluidLayout";
+import CenterFluidLayout from "components/layouts/CenterFluidLayout";
 import BasicPaperLayout from "components/layouts/BasicPaperLayout";
 import React from "react";
 

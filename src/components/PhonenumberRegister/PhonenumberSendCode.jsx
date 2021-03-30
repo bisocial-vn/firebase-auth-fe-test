@@ -91,6 +91,7 @@ function PhonenumberSendCode({ onSubmit, loading }) {
             size="large"
             color="primary"
             style={{ marginTop: "12px" }}
+            disabled={loading}
             startIcon={loading ? <CircularProgress size="1rem" /> : <SmsIcon />}
           >
             Send
