@@ -23,6 +23,7 @@ function EmailVerifyConfirm() {
         localStorage.removeItem("EMAIL_FOR_REGISTER");
         const firebaseIdToken = res.user.getIdToken(true);
         console.log(firebaseIdToken);
+
         setStatus("complite");
       })
       .catch((err) => console.log(err));
