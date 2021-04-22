@@ -9,6 +9,7 @@ import BasicPaperLayout from "components/layouts/BasicPaperLayout";
 import GTranslateIcon from "@material-ui/icons/GTranslate";
 import React from "react";
 import { NavLink } from "react-router-dom";
+import AuthApi from "apis/AuthApi";
 
 const useStyles = makeStyles((theme) => ({
   loginOptionItem: {
@@ -18,6 +19,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function LoginsPage() {
+  React.useEffect(() => {
+    AuthApi.loginWithCredential("test01@test.test", "secret")
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  }, []);
   const classes = useStyles();
 
   return (

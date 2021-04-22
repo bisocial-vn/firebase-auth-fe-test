@@ -12,8 +12,15 @@ import {
 } from "@material-ui/core";
 import Lock from "@material-ui/icons/Lock";
 import BasicPaperLayout from "components/layouts/BasicPaperLayout";
+import AuthApi from "apis/AuthApi";
 
 function HomePage() {
+  React.useEffect(() => {
+    AuthApi.refreshToken()
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <>
       <Grid
