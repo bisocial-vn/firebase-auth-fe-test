@@ -35,7 +35,7 @@ function RegistersPage() {
     >
       <Container maxWidth="xs">
         <BasicPaperLayout
-          headerText="REGISTER"
+          headerText="REGISTERS"
           headerIcon={<AccountBoxIcon color="primary" />}
         >
           <Grid
@@ -77,7 +77,7 @@ function RegistersPage() {
               to="phonenumber"
               startIcon={<MobileFriendlyIcon />}
             >
-              Register with phonenumber
+              Register with mobile phone
             </Button>
             <Divider
               className={classes.regOptionItem}

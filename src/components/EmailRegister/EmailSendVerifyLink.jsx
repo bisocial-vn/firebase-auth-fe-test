@@ -17,11 +17,13 @@ function EmailSendVerifyLink() {
   const onSendEmailVerifyLink = (data) => {
     console.log(data);
     setStatus("loading");
+    let continueUrl = window?.location.origin + "/firbs/auth/action";
+    const actionCodeSetting = {
+      url: continueUrl,
+      handleCodeInApp: true,
+    };
     firebaseAuth
-      .sendSignInLinkToEmail(data.email, {
-        url: "http://localhost:3000/finishSignUp?cartId=1234",
-        handleCodeInApp: true,
-      })
+      .sendSignInLinkToEmail(data.email, actionCodeSetting)
       .then(() => {
         localStorage.setItem("EMAIL_FOR_REGISTER", data.email);
         setStatus("complite");

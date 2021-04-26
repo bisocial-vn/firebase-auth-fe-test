@@ -19,7 +19,7 @@ function BasicPaperLayout({ children, headerText, headerIcon }) {
         </IconButton>
         <Box display="flex" alignContent="center" alignItems="center">
           {headerIcon}
-          <Typography variant="h6" component="h1" color="primary">
+          <Typography variant="h6" component="h1" color="primary" noWrap>
             &nbsp;{headerText}
           </Typography>
         </Box>
@@ -32,7 +32,7 @@ function BasicPaperLayout({ children, headerText, headerIcon }) {
       <Box m={2}>{children}</Box>
       <Box bgcolor="background.default" textAlign="center">
         <IconButton color="primary" component={NavLink} to="/" size="medium">
-          <BubbleChart fontSize="large" />
+          <BubbleChart fontSize="inherit" />
         </IconButton>
       </Box>
     </Paper>

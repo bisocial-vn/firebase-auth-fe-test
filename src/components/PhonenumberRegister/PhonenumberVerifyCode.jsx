@@ -9,19 +9,31 @@ import {
   Typography,
   DialogTitle,
   Box,
+  InputAdornment,
 } from "@material-ui/core";
 import React, { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useNavigate } from "react-router";
+import LockIcon from "@material-ui/icons/Lock";
+import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 
 const VERIFY_CODE_PATTERN = /\d{6}$/;
 
-function PhonenumberVerifyCode({ showVerifyDialog, phoneVerifyFn }) {
+function PhonenumberVerifyCode({
+  showVerifyDialog,
+  phoneVerifyFn,
+  phonenumber,
+}) {
   const { handleSubmit, control, errors: fieldErrors } = useForm({
     mode: "onTouched",
     reValidateMode: "onChange",
   });
 
+  const phonenumberHiddenFormat =
+    "+84 xxx " +
+    phonenumber.substring(phonenumber.length - 3, phonenumber.length);
+
+  const [status, setStatus] = useState("initial");
   const [errMsg, setErrMsg] = useState();
 
   const navigate = useNavigate();
@@ -67,9 +79,20 @@ function PhonenumberVerifyCode({ showVerifyDialog, phoneVerifyFn }) {
         <DialogTitle color="primary">Confirm phone number verify</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Enter your verify code from your phone number:
+            Enter your verify code from your phone number
+            {
+              <Typography variant="caption" color="primary">
+                &nbsp;{phonenumberHiddenFormat}&nbsp;
+              </Typography>
+            }
+            :
+            {errMsg && (
+              <Typography variant="body2" color="error" align="center">
+                {errMsg}
+              </Typography>
+            )}
           </DialogContentText>
-          <Box px={6}>
+          <Box px={2}>
             <Controller
               name="verifyCode"
               control={control}
@@ -112,30 +135,61 @@ function PhonenumberVerifyCode({ showVerifyDialog, phoneVerifyFn }) {
                 />
               )}
             />
+            <Controller
+              name="password"
+              control={control}
+              defaultValue={""}
+              rules={{
+                required: {
+                  value: true,
+                  message: "Password is required.",
+                },
+                minLength: {
+                  value: 5,
+                  message: "Password must at least 6 character length.",
+                },
+                // validate: (value) => validateEmail(value),
+              }}
+              render={({ value, onBlur, onChange }) => (
+                <TextField
+                  id="password"
+                  name="password"
+                  type="password"
+                  label="Password"
+                  variant="outlined"
+                  value={value}
+                  onChange={onChange}
+                  onBlur={onBlur}
+                  fullWidth
+                  required
+                  autoFocus
+                  margin="normal"
+                  disabled={status === "loading" || status === "success"}
+                  helperText={
+                    fieldErrors.password
+                      ? fieldErrors.password.message
+                      : undefined
+                  }
+                  error={!!fieldErrors.password}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <LockIcon color="primary" />
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+              )}
+            />
           </Box>
-          {/* <TextField
-            id="phoneVerifyCode"
-            name="phoneVerifyCode"
-            type="number"
-            label="Phonenumber verify code"
-            variant="outlined"
-            color="primary"
-            margin="dense"
-            size="small"
-            fullWidth
-            autoFocus
-            value={phoneVerifyCode}
-            onChange={handlerVerifyCodeChange}
-            required
-          /> */}
-          {errMsg && (
-            <Typography variant="body2" color="error" align="center">
-              {errMsg}
-            </Typography>
-          )}
         </DialogContent>
         <DialogActions>
-          <Button variant="contained" color="primary" type="submit">
+          <Button
+            variant="contained"
+            color="primary"
+            type="submit"
+            endIcon={<CheckCircleIcon color="inherit" />}
+          >
             Verify
           </Button>
         </DialogActions>

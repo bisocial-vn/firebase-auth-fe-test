@@ -16,17 +16,22 @@ const app = firebase.initializeApp(firebaseConfig);
 firebase.analytics(app);
 
 const firebaseAuth = app.auth();
+if (process.env.REACT_APP_FIREBASE_LOCAL_EMULATOR) {
+  firebaseAuth.useEmulator("http://localhost:9099");
+}
 firebaseAuth.languageCode = "vi";
 firebaseAuth.setPersistence(firebase.auth.Auth.Persistence.NONE); // Do not store any firebase auth state
 
 firebaseAuth.onAuthStateChanged((fUser) => {
   if (fUser) {
     console.log(fUser);
-  } else {
-    console.log(fUser);
   }
 });
 
-export { firebaseAuth, app as firebaseApp, firebaseConfig };
+const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
+googleAuthProvider.addScope("profile");
+googleAuthProvider.addScope("email");
+
+export { firebaseAuth, app as firebaseApp, firebaseConfig, googleAuthProvider };
 
 export default firebase;

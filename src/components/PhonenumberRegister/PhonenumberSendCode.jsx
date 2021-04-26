@@ -58,7 +58,7 @@ function PhonenumberSendCode({ onSubmit, loading }) {
                 id="phone"
                 name="phone"
                 type="tel"
-                label="Phone"
+                label="Mobile phone"
                 variant="outlined"
                 value={value}
                 onChange={onChange}
